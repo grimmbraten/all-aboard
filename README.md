@@ -62,7 +62,7 @@ const { parallel } = require("all-aboard");
 
 If you want asynchronous functions to be executed as fast as possible before proceeding on the main thread, you can use the parallel function. Each asynchronous function will be executed as soon as possible, but the main thread will not proceed until each promise has been resolved.
 
-### Please note
+### Passing arguments
 
 Asynchronous functions without passing any arguments can passed to a function by using the function name
 
@@ -79,6 +79,14 @@ await sequence(() => asyncFunc("argument"));
 ```javascript
 await parallel(asyncFunc.bind(this, "argument"));
 ```
+
+You might come across a use case where you would like to pass the same arguments to each asynchronous function in your collection. Instead of repeating yourself, you can pass all shared arguments to the `sequence` or `parallel` function by passing them after the asynchronous function collection.
+
+```javascript
+await sequence(asyncFuncArr, "arg1", "arg2"));
+```
+
+Please note that any shared arguments will be overwritten by specifically passed arguments for an asynchronous function.
 
 ## Uninstall
 
