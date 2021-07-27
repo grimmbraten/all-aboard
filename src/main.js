@@ -1,4 +1,4 @@
-const sequence = async tasks => {
+const sequence = async (tasks, ...arguments) => {
   if (!Array.isArray(tasks))
     throw new TypeError(
       `expected parameter with type of array, received ${typeof tasks}`
@@ -9,11 +9,11 @@ const sequence = async tasks => {
       throw new TypeError(
         `expected [AsyncFunction: name] or [Function (anonymous)], received ${typeof task}`
       );
-    await task();
+     arguments ? await task(...arguments) : await task();
   }
 };
 
-const parallel = tasks => {
+const parallel = (tasks, ...arguments) => {
   let promises = [];
 
   if (!Array.isArray(tasks))
@@ -26,7 +26,7 @@ const parallel = tasks => {
       throw new TypeError(
         `expected [AsyncFunction: name] or [Function (anonymous)], received ${typeof task}`
       );
-    promises.push(task());
+    promises.push(arguments ? task(...arguments) : task());
   });
 
   return Promise.all(promises);
