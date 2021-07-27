@@ -10,7 +10,7 @@
 
 <br />
 
-A small javascript library to help with parallel/sequential asynchronous tasks.
+A small Javascript library to perform parallel and/or sequential asynchronous tasks with ease.
 
 ## Installation
 
