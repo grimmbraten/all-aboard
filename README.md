@@ -55,10 +55,10 @@ const response = await sequence(tasks[], arguments[], eject);
 ```javascript
 const { sequence } = require("all-aboard");
 
-const foo = [async1, async2, async3];
+const arr = [async1, async2, async3];
 
 (async () => {
-  await sequence(foo, ["shared", "arguments"], true);
+  await sequence(arr, ["shared", "arguments"], true);
 })();
 ```
 
@@ -111,7 +111,7 @@ await parallel(asyncFunc.bind(this, "bar", "baz"));
 You might come across a use case where you would like to pass the same arguments to each asynchronous function in your tasks. Instead of repeating yourself, you can pass all shared arguments to the `sequence` or `parallel` function by passing them in an array after the `tasks` argument.
 
 ```javascript
-await sequence(asyncFuncArr, ["foo", "bar"]));
+await sequence(asyncFuncArr, ["foo", "bar"]);
 ```
 
 **Please note** that shared arguments can be overwritten by specific arguments
