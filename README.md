@@ -120,12 +120,12 @@ await sequence(asyncFuncArr, ["foo", "bar"]));
 
 Each response contains a promise summary of each executed task. If the status is `fulfilled`, the object will contain a `value` property containing the returned value from the successful task. If the status has been `rejected`, the object will instead contain a `reason` property with thrown error from the unsuccessful task.
 
-```json
+```javascript
 [
-  { "status": "fulfilled", "value": undefined },
-  { "status": "fulfilled", "value": "returned value" },
-  { "status": "rejected", "reason": "thrown error" }
-]
+  { status: "fulfilled", value: undefined },
+  { status: "fulfilled", value: "returned value" },
+  { status: "rejected", reason: "thrown error" }
+];
 ```
 
 ## Uninstall
