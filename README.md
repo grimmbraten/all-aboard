@@ -40,17 +40,39 @@ For more information, please refer to the [npm documentation](https://docs.npmjs
 
 ### Sequence
 
+The `sequence` function allows you to run asynchronous functions in order, one after the other, before proceeding on the main thread. Each asynchronous function is executed in incremental order, meaning that `tasks[0]` runs first, `tasks[1]` after that, and so on.
+
+Uniquely to the `sequence` function, you have the option to be ejected back on the main thread if any of the asynchronous tasks are rejected. This means that if a task throws an error in the middle, the `sequence` function will not continue to run the remaining tasks.
+
+#### Structure
+
+```javascript
+const response = await sequence(tasks[], arguments[], eject);
+```
+
+#### Example
+
 ```javascript
 const { sequence } = require("all-aboard");
 
+const foo = [async1, async2, async3];
+
 (async () => {
-  await sequence(asyncFunc, () => asyncFunc("with argument"));
+  await sequence(foo, ["shared", "arguments"], true);
 })();
 ```
 
-If you want asynchronous functions be be executed one after another before proceeding on the main thread, you can use the sequence function. Each asynchronous function will be executed in the order that they are defined in the array.
-
 ### Parallel
+
+The `parallel` function allows you to run asynchronous functions in parallel, non-blocking behavior, before proceeding on the main thread. Each asynchronous function will be executed as soon as possible, but the main thread will not proceed until each promise has been settled.
+
+#### Structure
+
+```javascript
+const response = await parallel(tasks[], arguments[]);
+```
+
+#### Example
 
 ```javascript
 const { parallel } = require("all-aboard");
@@ -60,33 +82,51 @@ const { parallel } = require("all-aboard");
 })();
 ```
 
-If you want asynchronous functions to be executed as fast as possible before proceeding on the main thread, you can use the parallel function. Each asynchronous function will be executed as soon as possible, but the main thread will not proceed until each promise has been resolved.
+### Arguments
 
-### Passing arguments
-
-Asynchronous functions without passing any arguments can passed to a function by using the function name
+If you want to run an asynchronous function without passing any arguments, you can pass the function as a task to the `sequence` or `parallel` function.
 
 ```javascript
 await parallel(asyncFunc);
 ```
 
-But asynchronous functions with passed arguments needs to either be wrapped by an anonymous function or you'll have to bind the arguments to the function.
+#### Specific
+
+Things become more tricky if you want to run an asynchronous function with some passed arguments. In that case, you need to either:
+
+1. Wrap the asynchronous function in an anonymous function.
 
 ```javascript
-await sequence(() => asyncFunc("argument"));
+await sequence(() => asyncFunc("foo"));
 ```
+
+2. Bind the desired arguments to the passed asynchronous function.
 
 ```javascript
-await parallel(asyncFunc.bind(this, "argument"));
+await parallel(asyncFunc.bind(this, "bar", "baz"));
 ```
 
-You might come across a use case where you would like to pass the same arguments to each asynchronous function in your collection. Instead of repeating yourself, you can pass all shared arguments to the `sequence` or `parallel` function by passing them after the asynchronous function collection.
+#### Shared
+
+You might come across a use case where you would like to pass the same arguments to each asynchronous function in your tasks. Instead of repeating yourself, you can pass all shared arguments to the `sequence` or `parallel` function by passing them in an array after the `tasks` argument.
 
 ```javascript
-await sequence(asyncFuncArr, "arg1", "arg2"));
+await sequence(asyncFuncArr, ["foo", "bar"]));
 ```
 
-Please note that any shared arguments will be overwritten by specifically passed arguments for an asynchronous function.
+**Please note** that shared arguments can be overwritten by specific arguments
+
+### Response
+
+Each response contains a promise summary of each executed task. If the status is `fulfilled`, the object will contain a `value` property containing the returned value from the successful task. If the status has been `rejected`, the object will instead contain a `reason` property with thrown error from the unsuccessful task.
+
+```json
+[
+  { "status": "fulfilled", "value": undefined },
+  { "status": "fulfilled", "value": "returned value" },
+  { "status": "rejected", "reason": "thrown error" }
+]
+```
 
 ## Uninstall
 
