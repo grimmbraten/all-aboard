@@ -2,7 +2,7 @@
   "name": "all-aboard",
   "description": "Perform parallel and/or sequential asynchronous tasks with ease",
   "author": "Erik Grimmbråten <79856585+grimmbraten@users.noreply.github.com>",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "main": "src/main.js",
   "license": "MIT",
   "keywords": [
