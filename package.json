@@ -6,8 +6,9 @@
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
-    "prepack": "yarn test",
-    "test": "jest --config=jest.config.js"
+    "check:unit": "jest --config=jest.config.js",
+    "prepack": "yarn check:eslint && yarn check:unit",
+    "check:eslint": "yarn eslint . --output-file ./reports/eslint.html --format html"
   },
   "keywords": [
     "async",
@@ -26,6 +27,8 @@
   },
   "devDependencies": {
     "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
     "prettier": "^2.3.2"
   }
