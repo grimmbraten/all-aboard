@@ -1,11 +1,9 @@
 const hasValidTasks = tasks => {
   if (!Array.isArray(tasks))
-    throw new TypeError(
-      `expected tasks to be type of array, but received ${typeof tasks}`
-    );
+    throw new TypeError(`expected tasks to be type of array, but received ${typeof tasks}`);
 
   tasks.forEach(task => {
-    if (typeof task !== "function")
+    if (typeof task !== 'function')
       throw new TypeError(
         `expected tasks to be type of [AsyncFunction: name] or [Function (anonymous)], but received ${typeof task}`
       );
@@ -30,10 +28,10 @@ const sequence = async (tasks, passed, eject = false) => {
     if (proceed) {
       try {
         const response = passed ? await task(...passed) : await task();
-        settled.push({ status: "fulfilled", value: response });
+        settled.push({ status: 'fulfilled', value: response });
       } catch (error) {
         if (eject) proceed = false;
-        settled.push({ status: "rejected", reason: error });
+        settled.push({ status: 'rejected', reason: error });
       }
     }
   }
