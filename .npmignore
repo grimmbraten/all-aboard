@@ -1,3 +1,6 @@
 coverage
 jest.config.js
 *.test.js
+.eslintignore
+.eslintrc
+.prettierrc

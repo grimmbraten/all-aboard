@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "no-alert": "warn",
+    "no-console": "warn",
+    "no-use-before-define": "off",
+    "no-magic-numbers": [
+      "warn",
+      {
+        "ignore": [1],
+        "enforceConst": true,
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true
+      }
+    ],
+    "prefer-arrow-callback": "warn",
+    "func-style": ["warn", "declaration", { "allowArrowFunctions": true }],
+    "no-var": "error",
+    "eqeqeq": "error",
+    "no-empty-pattern": "error",
+    "no-empty-function": "error",
+    "no-trailing-spaces": "error",
+    "no-duplicate-imports": "error",
+    "@typescript-eslint/no-use-before-define": ["error"]
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"]
+}

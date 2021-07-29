@@ -1,0 +1,4 @@
+*.md
+coverage
+*.config.*
+node_modules
