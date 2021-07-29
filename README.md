@@ -2,14 +2,6 @@
 
 <br />
 
-<div align="center">
-<a href="https://www.javascript.com/"><img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/></a>
-<a href="https://github.com/grimmbraten/all-aboard"><img alt="GitHub" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a>
-
-</div>
-
-<br />
-
 A small Javascript library to perform parallel and/or sequential asynchronous tasks with ease.
 
 ## Installation
@@ -53,12 +45,12 @@ const response = await sequence(tasks[], arguments[], eject);
 #### Example
 
 ```javascript
-const { sequence } = require("all-aboard");
+const { sequence } = require('all-aboard');
 
 const arr = [async1, async2, async3];
 
 (async () => {
-  await sequence(arr, ["shared", "arguments"], true);
+  await sequence(arr, ['shared', 'arguments'], true);
 })();
 ```
 
@@ -75,10 +67,10 @@ const response = await parallel(tasks[], arguments[]);
 #### Example
 
 ```javascript
-const { parallel } = require("all-aboard");
+const { parallel } = require('all-aboard');
 
 (async () => {
-  await parallel(() => asyncFunc("with argument"), asyncFunc);
+  await parallel(() => asyncFunc('with argument'), asyncFunc);
 })();
 ```
 
@@ -97,13 +89,13 @@ Things become more tricky if you want to run an asynchronous function with some 
 1. Wrap the asynchronous function in an anonymous function.
 
 ```javascript
-await sequence(() => asyncFunc("foo"));
+await sequence(() => asyncFunc('foo'));
 ```
 
 2. Bind the desired arguments to the passed asynchronous function.
 
 ```javascript
-await parallel(asyncFunc.bind(this, "bar", "baz"));
+await parallel(asyncFunc.bind(this, 'bar', 'baz'));
 ```
 
 #### Shared
@@ -111,7 +103,7 @@ await parallel(asyncFunc.bind(this, "bar", "baz"));
 You might come across a use case where you would like to pass the same arguments to each asynchronous function in your tasks. Instead of repeating yourself, you can pass all shared arguments to the `sequence` or `parallel` function by passing them in an array after the `tasks` argument.
 
 ```javascript
-await sequence(asyncFuncArr, ["foo", "bar"]);
+await sequence(asyncFuncArr, ['foo', 'bar']);
 ```
 
 **Please note** that shared arguments can be overwritten by specific arguments
@@ -122,9 +114,9 @@ Each response contains a promise summary of each executed task. If the status is
 
 ```javascript
 [
-  { status: "fulfilled", value: undefined },
-  { status: "fulfilled", value: "returned value" },
-  { status: "rejected", reason: "thrown error" }
+  { status: 'fulfilled', value: undefined },
+  { status: 'fulfilled', value: 'returned value' },
+  { status: 'rejected', reason: 'thrown error' }
 ];
 ```
 
