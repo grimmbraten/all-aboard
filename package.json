@@ -2,9 +2,12 @@
   "name": "all-aboard",
   "description": "Perform parallel and/or sequential asynchronous tasks with ease",
   "author": "Erik Grimmbråten <79856585+grimmbraten@users.noreply.github.com>",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "src/main.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --config=jest.config.js"
+  },
   "keywords": [
     "async",
     "await",
@@ -19,5 +22,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/grimmbraten/all-aboard"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
