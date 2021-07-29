@@ -10,30 +10,30 @@ const hasValidTasks = tasks => {
         `expected tasks to be type of [AsyncFunction: name] or [Function (anonymous)], but received ${typeof task}`
       );
   });
-}
+};
 
-const hasValidArguments = arguments => {
-  if(!(Array.isArray(arguments) || arguments === undefined))
+const hasValidArguments = passed => {
+  if (!(Array.isArray(passed) || passed === undefined))
     throw new TypeError(
-      `expected arguments to be type of array or undefined, but received ${typeof arguments}`
+      `expected arguments to be type of array or undefined, but received ${typeof passed}`
     );
-}
+};
 
-const sequence = async (tasks, arguments, eject = false) => {
+const sequence = async (tasks, passed, eject = false) => {
   let proceed = true;
   const settled = [];
 
   hasValidTasks(tasks);
-  hasValidArguments(arguments);
-  
+  hasValidArguments(passed);
+
   for (const task of tasks) {
-    if(proceed) {
+    if (proceed) {
       try {
-        const response = arguments ? await task(...arguments) : await task();
-        settled.push({ status: 'fulfilled', value: response });
+        const response = passed ? await task(...passed) : await task();
+        settled.push({ status: "fulfilled", value: response });
       } catch (error) {
         if (eject) proceed = false;
-        settled.push({ status: 'rejected', reason: error });
+        settled.push({ status: "rejected", reason: error });
       }
     }
   }
@@ -41,14 +41,14 @@ const sequence = async (tasks, arguments, eject = false) => {
   return settled;
 };
 
-const parallel = (tasks, arguments) => {
+const parallel = (tasks, passed) => {
   let promises = [];
 
   hasValidTasks(tasks);
-  hasValidArguments(arguments);
+  hasValidArguments(passed);
 
   tasks.forEach(task => {
-    promises.push(arguments ? task(...arguments) : task());
+    promises.push(passed ? task(...passed) : task());
   });
 
   return Promise.allSettled(promises);
