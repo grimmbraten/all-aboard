@@ -32,7 +32,6 @@
     "no-implied-eval": "error",
     "no-multi-spaces": "error",
     "no-self-compare": "error",
-    "no-extra-parens": "error",
     "curly": ["error", "multi"],
     "no-useless-return": "error",
     "no-inline-comments": "error",
