@@ -8,7 +8,8 @@
   "scripts": {
     "check:unit": "jest --config=jest.config.js",
     "prepack": "yarn check:eslint && yarn check:unit",
-    "check:eslint": "yarn eslint . --output-file ./reports/eslint.html --format html"
+    "check:eslint": "yarn eslint .",
+    "report:eslint": "yarn eslint . --output-file ./reports/eslint.html --format html"
   },
   "keywords": [
     "async",
