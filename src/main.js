@@ -40,7 +40,7 @@ const sequence = async (tasks, passed, eject = false) => {
 };
 
 const parallel = (tasks, passed) => {
-  let promises = [];
+  const promises = [];
 
   hasValidTasks(tasks);
   hasValidArguments(passed);
