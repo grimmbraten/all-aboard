@@ -24,8 +24,8 @@ const sequence = async (tasks, passed, eject = false) => {
   hasValidTasks(tasks);
   hasValidArguments(passed);
 
-  for (const task of tasks) {
-    if (proceed) {
+  for (const task of tasks)
+    if (proceed)
       try {
         const response = passed ? await task(...passed) : await task();
         settled.push({ status: 'fulfilled', value: response });
@@ -33,8 +33,6 @@ const sequence = async (tasks, passed, eject = false) => {
         if (eject) proceed = false;
         settled.push({ status: 'rejected', reason: error });
       }
-    }
-  }
 
   return settled;
 };
