@@ -1,7 +1,8 @@
 reports
 coverage
-jest.config.js
-*.test.js
-.eslintignore
+.github
 .eslintrc
 .prettierrc
+.eslintignore
+*.test.js
+jest.config.js
